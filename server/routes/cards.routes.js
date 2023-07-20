@@ -1,0 +1,66 @@
+let mongoose = require('mongoose'),
+    express = require('express'),
+    router = express.Router();
+let user = require('../models/user-schema');
+
+router.route('/').get((req, res, next) => {
+    const cards = [
+    ];
+    console.log('cards', cards);
+    res.json(cards);
+})
+
+router.route('/create').post((req, res, next) => {
+    user.create(req.body, (error, data) => {
+        if (error) {
+            return next(error)
+        } else {
+            console.log(data)
+            res.json(data)
+        }
+    })
+});
+router.route('/cards').get((req, res, next) => {
+    user.find((error, data) => {
+        if (error) {
+            return next(error)
+        } else {
+            res.json(data)
+        }
+    })
+})
+router.route('/edit/:id').get((req, res) => {
+    user.findById(req.params.id, (error, data) => {
+        if (error) {
+            return next(error)
+        } else {
+            res.json(data)
+        }
+    })
+})
+
+router.route('/update/:id').put((req, res, next) => {
+    user.findByIdAndUpdate(req.params.id, {
+        $set: req.body
+    }, (error, data) => {
+        if (error) {
+            return next(error);
+            console.log(error)
+        } else {
+            res.json(data)
+            console.log('User updated successfully !')
+        }
+    })
+})
+router.route('/delete/:id').delete((req, res, next) => {
+    user.findByIdAndRemove(req.params.id, (error, data) => {
+        if (error) {
+            return next(error);
+        } else {
+            res.status(200).json({
+                msg: data
+            })
+        }
+    })
+})
+module.exports = router;
