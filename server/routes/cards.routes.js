@@ -5,15 +5,15 @@ let user = require('../models/user-schema');
 const Card = require('../models/card-schema');
 
 
-router.route('/').get((req, res, next) => {
+router.route('/').get(async (req, res, next) => {
     try{
-        const cards = Card.find();
+        const cards = await Card.find();
+        console.log('cards', cards);
         res.json(cards);
     }
     catch(error) {
         res.send(error);
     }
-    console.log('cards', cards);
 })
 
 router.route('/create').post((req, res, next) => {
@@ -45,28 +45,26 @@ router.route('/edit/:id').get((req, res) => {
     })
 })
 
-router.route('/update/:id').put((req, res, next) => {
-    user.findByIdAndUpdate(req.params.id, {
-        $set: req.body
-    }, (error, data) => {
-        if (error) {
-            return next(error);
-            console.log(error)
-        } else {
-            res.json(data)
-            console.log('User updated successfully !')
-        }
-    })
+router.route('/update/:id').put(async (req, res, next) => {
+    try {
+        const data = await Card.findByIdAndUpdate(req.params.id, { $set: req.body });
+        console.log('Update card', data);
+        res.json(data);
+    }
+    catch(error) {
+        return next(error);
+    }
 })
-router.route('/delete/:id').delete((req, res, next) => {
-    user.findByIdAndRemove(req.params.id, (error, data) => {
-        if (error) {
-            return next(error);
-        } else {
-            res.status(200).json({
-                msg: data
-            })
-        }
-    })
+
+router.route('/delete/:id').delete(async (req, res, next) => {
+    try {
+        const data = await Card.findByIdAndRemove(req.params.id);
+        res.status(200).json({
+            msg: data
+        })
+    }
+    catch(err) {
+        return next(error);
+    }
 })
 module.exports = router;
