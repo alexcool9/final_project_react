@@ -15,6 +15,16 @@ router.route('/').get(async (req, res, next) => {
     }
 })
 
+router.route('/my-cards').get(async (req, res, next) => {
+    try{
+        const cards = await Card.find();
+        res.json(cards);
+    }
+    catch(error) {
+        res.send(error);
+    }
+})
+
 router.route('/create').post((req, res, next) => {
     Card.create(req.body).then()
         .then((result) => {
