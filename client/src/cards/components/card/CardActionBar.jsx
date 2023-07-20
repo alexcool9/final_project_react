@@ -13,14 +13,14 @@ import { useNavigate } from "react-router-dom";
 import ROUTES from "../../../routes/routesModel";
 import useCards from "../../hooks/useCards";
 
-const CardActionBar = ({ cardId, onDelete, onLike, cardUserId, cardLikes }) => {
-  
+const CardActionBar = ({ cardId, onDelete, onLike, cardUserId, cardLikes = [] }) => {
+
   const [isDialogOpen, setDialog] = useState(false);
   const navigate = useNavigate();
   const { user } = useUser();
   const { handleLikeCard } = useCards();
   const [isLike, setLike] = useState(() => {
-    if(!user) return false;
+    if (!user) return false;
     // return !!cardLikes.find(id => id === user._id)
     return cardLikes.includes(user._id)
   });

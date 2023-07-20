@@ -2,23 +2,29 @@ let mongoose = require('mongoose'),
     express = require('express'),
     router = express.Router();
 let user = require('../models/user-schema');
+const Card = require('../models/card-schema');
+
 
 router.route('/').get((req, res, next) => {
-    const cards = [
-    ];
+    try{
+        const cards = Card.find();
+        res.json(cards);
+    }
+    catch(error) {
+        res.send(error);
+    }
     console.log('cards', cards);
-    res.json(cards);
 })
 
 router.route('/create').post((req, res, next) => {
-    user.create(req.body, (error, data) => {
-        if (error) {
-            return next(error)
-        } else {
-            console.log(data)
-            res.json(data)
-        }
-    })
+    Card.create(req.body).then()
+        .then((result) => {
+            res.send({ kq: 1, msg: 'Đã thêm thành công' })
+        })
+        .catch((err) => {
+            res.send({ kq: 0, msg: 'kết nối DB thất bại' });
+            return next(error);
+        })
 });
 router.route('/cards').get((req, res, next) => {
     user.find((error, data) => {

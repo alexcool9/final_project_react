@@ -8,6 +8,6 @@ let cardSchema = new Schema({
         type: String
     }
 }, {
-        collection: 'users'
+        collection: 'cards'
     })
-module.exports = mongoose.model('User', cardSchema)
+module.exports = mongoose.model('Card', cardSchema)
