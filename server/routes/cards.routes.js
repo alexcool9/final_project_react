@@ -8,7 +8,6 @@ const Card = require('../models/card-schema');
 router.route('/').get(async (req, res, next) => {
     try{
         const cards = await Card.find();
-        console.log('cards', cards);
         res.json(cards);
     }
     catch(error) {
@@ -19,13 +18,14 @@ router.route('/').get(async (req, res, next) => {
 router.route('/create').post((req, res, next) => {
     Card.create(req.body).then()
         .then((result) => {
-            res.send({ kq: 1, msg: 'Đã thêm thành công' })
+            res.send({ kq: 1, msg: 'New card was created' })
         })
         .catch((err) => {
-            res.send({ kq: 0, msg: 'kết nối DB thất bại' });
+            res.send({ kq: 0, msg: err });
             return next(error);
         })
 });
+
 router.route('/cards').get((req, res, next) => {
     user.find((error, data) => {
         if (error) {
@@ -35,6 +35,7 @@ router.route('/cards').get((req, res, next) => {
         }
     })
 })
+
 router.route('/edit/:id').get((req, res) => {
     user.findById(req.params.id, (error, data) => {
         if (error) {
@@ -48,7 +49,6 @@ router.route('/edit/:id').get((req, res) => {
 router.route('/update/:id').put(async (req, res, next) => {
     try {
         const data = await Card.findByIdAndUpdate(req.params.id, { $set: req.body });
-        console.log('Update card', data);
         res.json(data);
     }
     catch(error) {
@@ -67,4 +67,5 @@ router.route('/delete/:id').delete(async (req, res, next) => {
         return next(error);
     }
 })
+
 module.exports = router;

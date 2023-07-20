@@ -20,7 +20,6 @@ router.post("/", async (req, res) => {
 
         res.send(user);
     } catch (error) {
-        console.log(error);
         res.send("An error occured");
     }
 });
@@ -30,8 +29,6 @@ router.post("/login", async (req, res) => {
     try {
         const { error } = validateUser(req.body);
         if (error) return res.status(400).send(error.details[0].message);
-
-        console.log('User', User);
 
         const user = await User.findOne({ email: req.body.email });
         if (!user) return res.status(400).send("Invalid email or password");
@@ -46,7 +43,6 @@ router.post("/login", async (req, res) => {
         const token = user.generateAuthToken();
         res.send(token);
     } catch (error) {
-        console.log(error);
         res.send("An error occured");
     }
 });
@@ -69,14 +65,14 @@ router.route('/create').post((req, res, next) => {
         }
     })
 });
-router.route('/').get((req, res) => {
-    user.find((error, data) => {
-        if (error) {
-            return next(error)
-        } else {
-            res.json(data)
-        }
-    })
+router.route('/').get(async (req, res) => {
+    try {
+        const data = await User.find();
+        res.json(data);
+    }
+    catch(error) {
+        return next(error)
+    }
 })
 router.route('/edit/:id').get((req, res) => {
     user.findById(req.params.id, (error, data) => {
@@ -88,28 +84,26 @@ router.route('/edit/:id').get((req, res) => {
     })
 })
 
-router.route('/update/:id').put((req, res, next) => {
-    user.findByIdAndUpdate(req.params.id, {
-        $set: req.body
-    }, (error, data) => {
-        if (error) {
-            return next(error);
-            console.log(error)
-        } else {
-            res.json(data)
-            console.log('User updated successfully !')
-        }
-    })
+router.route('/update/:id').put(async (req, res, next) => {
+    try {
+        const data = await User.findByIdAndUpdate(req.params.id, {
+            $set: req.body
+        });
+        res.json(data);
+    }
+    catch(error) {
+        return next(error);
+    }
 })
-router.route('/delete/:id').delete((req, res, next) => {
-    user.findByIdAndRemove(req.params.id, (error, data) => {
-        if (error) {
-            return next(error);
-        } else {
-            res.status(200).json({
-                msg: data
-            })
-        }
-    })
+router.route('/delete/:id').delete(async (req, res, next) => {
+    try {
+        const data = await User.findByIdAndRemove(req.params.id);
+        res.status(200).json({
+            msg: data
+        })
+    }
+    catch(err) {
+        return next(error);
+    }
 })
 module.exports = router;
