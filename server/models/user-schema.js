@@ -6,8 +6,18 @@ const Joi = require("joi");
 let userSchema = new Schema(
     {
         name: {
-            type: String,
-            required: true,
+            first: {
+                type: String,
+                required: true,
+            },
+            middle: {
+                type: String,
+                required: false,
+            },
+            last: {
+                type: String,
+                required: true,
+            },
         },
         email: {
             type: String,
@@ -16,6 +26,46 @@ let userSchema = new Schema(
         password: {
             type: String,
             required: true,
+        },
+        address: {
+            state: {
+                type: String,
+                required: false,
+            },
+            country: {
+                type: String,
+                required: false,
+            },
+            city: {
+                type: String,
+                required: true,
+            },
+            city: {
+                type: String,
+                required: true,
+            },
+            street: {
+                type: String,
+                required: true,
+            },
+            zip: {
+                type: Number,
+                required: false,
+            },
+            houseNumber: {
+                type: Number,
+                required: false,
+            },
+            image: {
+                url: {
+                    type: String,
+                    required: false,
+                },
+                alt: {
+                    type: String,
+                    required: false,
+                },
+            }
         },
         isBusiness: {
             type: Boolean
@@ -35,10 +85,15 @@ const User = mongoose.model("user", userSchema);
 
 const validate = (user) => {
     const schema = Joi.object({
-        name: Joi.string().required(),
+        name: Joi.object().required(),
         email: Joi.string().email().required(),
         password: Joi.string().required(),
+        phone: Joi.string().required(),
+        address: Joi.object().required(),
+        image: Joi.object().optional(),
+        isBusiness: Joi.boolean().required()
     });
+
     return schema.validate(user);
 };
 
