@@ -30,7 +30,6 @@ const useUsers = () => {
     const handleLogin = useCallback(async (user) => {
         try {
             const token = await login(user); // token: kjh34kl5h3lk45h345.k3jh45k3j4h5.kjh345kuj3h45
-            console.log('tokennn', token)
             setTokenInLocalStorage(token); // localStorage: {token: kjh34kl5h3lk45h345.k3jh45k3j4h5.kjh345kuj3h45}
             setToken(token);
             const userFromLocalStorage = getUser();
@@ -51,6 +50,7 @@ const useUsers = () => {
         async (userFromClient) => {
             try {
                 const normalizedUser = normalizeUser(userFromClient);
+                console.log('normalizedUser', normalizedUser);
                 await signup(normalizedUser);
                 await handleLogin({
                     email: userFromClient.email,

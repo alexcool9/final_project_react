@@ -36,7 +36,6 @@ const Menu = ({ isOpen, onClose, anchorEl }) => {
           onClick={onClose}
           styles={{ display: { xs: "block", md: "none" } }}
         />
-
         {!user && (
           <>
             <MenuLink
