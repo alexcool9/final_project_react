@@ -29,8 +29,8 @@ const useUsers = () => {
 
     const handleLogin = useCallback(async (user) => {
         try {
-            const token = await login(user); // token: kjh34kl5h3lk45h345.k3jh45k3j4h5.kjh345kuj3h45
-            setTokenInLocalStorage(token); // localStorage: {token: kjh34kl5h3lk45h345.k3jh45k3j4h5.kjh345kuj3h45}
+            const token = await login(user);
+            setTokenInLocalStorage(token);
             setToken(token);
             const userFromLocalStorage = getUser();
             requestStatus(false, null, null, userFromLocalStorage);

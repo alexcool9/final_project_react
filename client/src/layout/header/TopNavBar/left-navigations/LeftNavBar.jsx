@@ -12,6 +12,8 @@ const LeftNavBar = () => {
 
   const { user } = useUser();
 
+  console.log('user', user);
+
   return (
     <Box>
       <LogoIcon />

@@ -77,7 +77,7 @@ let userSchema = new Schema(
 );
 
 userSchema.methods.generateAuthToken = function () {
-    const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY);
+    const token = jwt.sign({ _id: this._id, isBusiness: this.isBusiness }, process.env.JWTPRIVATEKEY);
     return token;
 };
 

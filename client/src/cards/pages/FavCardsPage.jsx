@@ -6,9 +6,11 @@ import { useEffect } from "react";
 import CardsFeedback from "../components/CardsFeedback";
 
 const FavCardsPage = () => {
-    const { value, ...rest } = useCards();
-    const { isPending, error, cards } = value;
+    const { value = {}, ...rest } = useCards();
+    const { isPending, error = '', cards } = value;
     const { handleDeleteCard, handleGetFavCards } = rest;
+
+    debugger;
 
     useEffect(() => {
         handleGetFavCards();
