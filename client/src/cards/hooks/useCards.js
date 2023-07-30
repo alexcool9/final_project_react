@@ -84,7 +84,7 @@ const useCards = () => {
         try {
             setPending(true);
             const cards = await getMyCards();
-            requestStatus(false, null, cards);
+            requestStatus(false, null, cards || []);
 
         } catch (error) {
             requestStatus(false, error, null);
@@ -126,9 +126,11 @@ const useCards = () => {
         try {
             setPending(true);
             const cards = await getCards();
-            const favCards = cards.filter(
-                card => !!card.likes.find(id => id === user._id)// change to use includes
-            );
+            if(cards){
+                var favCards = (cards || []).filter(
+                    card => !!card.likes.find(id => id === user._id)// change to use includes
+                );
+            }
             requestStatus(false, null, favCards);
         } catch (error) {
             requestStatus(false, error, null);
