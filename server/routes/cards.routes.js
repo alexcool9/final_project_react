@@ -25,6 +25,17 @@ router.route('/my-cards').get(async (req, res, next) => {
     }
 })
 
+router.route('/:id').patch( async (req, res, next) => {
+    try{
+        const cards = await Card.find();
+        console.log('cards',cards );
+        res.json(cards);
+    }
+    catch(error) {
+        res.send(error);
+    }
+});
+
 router.route('/create').post((req, res, next) => {
     Card.create(req.body).then()
         .then((result) => {
@@ -38,6 +49,17 @@ router.route('/create').post((req, res, next) => {
 
 router.route('/cards').get((req, res, next) => {
     user.find((error, data) => {
+        if (error) {
+            return next(error)
+        } else {
+            res.json(data)
+        }
+    })
+})
+
+
+router.route('/:id').get((req, res) => {
+    user.findById(req.params.id, (error, data) => {
         if (error) {
             return next(error)
         } else {
