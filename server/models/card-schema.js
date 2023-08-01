@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 let cardSchema = new Schema({
+    user_id: {
+        type: String
+    },
     title: {
         type: String
     },
@@ -39,8 +42,11 @@ let cardSchema = new Schema({
     },
     imageUrl: {
         type: String
+    },
+    likes: {
+        type: Array,
+        default: []
     }
- 
 
 }, {
         collection: 'cards'

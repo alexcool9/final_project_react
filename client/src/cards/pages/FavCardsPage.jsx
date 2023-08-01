@@ -13,8 +13,6 @@ const FavCardsPage = () => {
     const { message: errorMessage = '' } = error || {};
     const { handleDeleteCard, handleGetFavCards } = rest;
 
-    debugger;
-
     useEffect(() => {
         handleGetFavCards();
     }, []);
