@@ -9,7 +9,7 @@ import CardsFeedback from "../components/CardsFeedback";
 import { useEffect } from "react";
 
 const MyCardsPage = () => {
-  const { value, handleGetMyCards, handleDeleteCard } = useCards();
+  const { value, handleGetMyCards, handleDeleteCard, handleLikeCard } = useCards();
   const { cards = [], error, isPending } = value;
 
   const { user } = useUser();
@@ -26,6 +26,11 @@ const MyCardsPage = () => {
 
   const onDeleteCard = async (cardId) => {
     await handleDeleteCard(cardId); // this will delete the card from the DB
+    await handleGetMyCards();
+  };
+
+  const onLikeCard = async (cardId) => {
+    await handleLikeCard(cardId); // this will delete the card from the DB
     await handleGetMyCards();
   };
 
@@ -54,6 +59,7 @@ const MyCardsPage = () => {
         error={error}
         cards={myCards}
         onDelete={onDeleteCard}
+        onLike={onLikeCard}
       />
     </Container>
   );

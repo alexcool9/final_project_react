@@ -3,7 +3,7 @@ let mongoose = require('mongoose'),
     router = express.Router();
 let user = require('../models/user-schema');
 const Card = require('../models/card-schema');
-
+const auth = require("../middleware/auth");
 
 router.route('/').get(async (req, res, next) => {
     try{
@@ -25,16 +25,42 @@ router.route('/my-cards').get(async (req, res, next) => {
     }
 })
 
-router.route('/:id').patch( async (req, res, next) => {
-    try{
-        const cards = await Card.find();
-        console.log('cards',cards );
-        res.json(cards);
+router.patch('/:id', auth, async (req, res)=>{
+    try {
+        const card = await Card.findById(req.params.id);
+        const index = card.likes.findIndex(like => like == req.user._id);
+        if(index >= 0) {
+            card.likes.splice(index, 1);
+        }
+        else {
+            card.likes.push(req.user._id);
+        }
+        card.save();
+        res.json(card);
     }
     catch(error) {
         res.send(error);
     }
 });
+
+// router.route('/:id').patch( async (req, res, next) => {
+//     try{
+//         const card = await Card.findById(req.params.id);
+//         console.log('user',req.user);
+//         const index = card.likes.findIndex(like => like == req.params.id);
+//         if(index >= 0) {
+//             card.likes.splice(index, 1);
+//         }
+//         else {
+//             card.likes.push(req.params.id);
+//         }
+//         card.save();
+//         res.json(card);
+//     }
+//     catch(error) {
+//         res.send(error);
+//     }
+// });
 
 router.route('/create').post((req, res, next) => {
     Card.create(req.body).then()
@@ -59,7 +85,7 @@ router.route('/cards').get((req, res, next) => {
 
 
 router.route('/:id').get((req, res) => {
-    user.findById(req.params.id, (error, data) => {
+    user.user.findById(req.params.id, (error, data) => {
         if (error) {
             return next(error)
         } else {
