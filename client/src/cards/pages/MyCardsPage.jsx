@@ -10,10 +10,14 @@ import { useEffect } from "react";
 
 const MyCardsPage = () => {
   const { value, handleGetMyCards, handleDeleteCard } = useCards();
-  const { cards, error, isPending } = value;
+  const { cards = [], error, isPending } = value;
 
   const { user } = useUser();
   const navigate = useNavigate();
+
+  const myCards = (cards || []).filter((card, index) => {
+    return card.user_id == user._id;
+  });
 
   useEffect(() => {
     if (!user) navigate(ROUTES.CARDS);
@@ -48,7 +52,7 @@ const MyCardsPage = () => {
       <CardsFeedback
         isPending={isPending}
         error={error}
-        cards={cards}
+        cards={myCards}
         onDelete={onDeleteCard}
       />
     </Container>
