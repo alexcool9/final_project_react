@@ -10,9 +10,11 @@ import { Container } from "@mui/system";
 import Form from "../../forms/components/Form";
 import Input from "../../forms/components/Input";
 
-const LoginPage = () => {
+const UserInfoPage = () => {
   const { user } = useUser();
   const { handleLogin } = useUsers();
+
+  console.log('userrr', user)
 
   const { value, ...rest } = useForm(
     initialLoginForm,
@@ -20,7 +22,7 @@ const LoginPage = () => {
     handleLogin
   );
 
-  if (user) return <Navigate replace to={ROUTES.CARDS} />;
+  if (!user) return <Navigate replace to={ROUTES.CARDS} />;
 
 
 
@@ -32,33 +34,18 @@ const LoginPage = () => {
         justifyContent: "center",
         alignItems: "center",
       }}>
-      <Form
-        onSubmit={rest.onSubmit}
-        onReset={rest.handleReset}
-        onChange={rest.validateForm}
-        title="Login"
-        styles={{ maxWidth: "450px" }}
-        to={ROUTES.CARDS}
-      >
-        <Input
-          label="email"
-          name="email"
-          type="email"
-          data={value.formData}
-          error={value.errors.email}
-          handleChange={rest.handleChange}
-        />
-        <Input
-          label="password"
-          name="password"
-          type="password"
-          error={value.errors.password}
-          handleChange={rest.handleChange}
-          data={value.formData}
-        />
-      </Form>
+      <div>
+        <h1>User Profile</h1>
+        <hr />
+        <h2>
+          Id: {user._id}
+        </h2>
+        <h2>
+          IsBusiness: {user.isBusiness.toString()}
+        </h2>
+      </div>
     </Container>
   )
 };
 
-export default LoginPage;
+export default UserInfoPage;
