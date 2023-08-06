@@ -8,7 +8,7 @@ const cardType = shape({
   subtitle: string.isRequired,
   // description: string.isRequired,
   // address: addressType.isRequired,
-  // image: imageType.isRequired,
+  image: imageType,
   // bizNumber: number.isRequired,
   // phone: string.isRequired,
   // likes: arrayOf(string).isRequired,

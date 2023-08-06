@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 let cardSchema = new Schema({
+    _id: { type: String },
     user_id: {
         type: String
     },

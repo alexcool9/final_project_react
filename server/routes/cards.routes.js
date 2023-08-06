@@ -84,14 +84,16 @@ router.route('/cards').get((req, res, next) => {
 })
 
 
-router.route('/:id').get((req, res) => {
-    user.user.findById(req.params.id, (error, data) => {
-        if (error) {
-            return next(error)
-        } else {
-            res.json(data)
-        }
-    })
+router.route('/:id').get(async (req, res, next) => {
+    try {
+        console.log('id', req.params.id);
+        const data = await Card.find({_id: req.params.id });
+        console.log('data', data)
+        res.json(data);
+    }
+    catch(error){
+        return next(error)        
+    }
 })
 
 router.route('/edit/:id').get((req, res) => {
@@ -114,7 +116,7 @@ router.route('/update/:id').put(async (req, res, next) => {
     }
 })
 
-router.route('/delete/:id').delete(async (req, res, next) => {
+router.route('/:id').delete(async (req, res, next) => {
     try {
         const data = await Card.findByIdAndRemove(req.params.id);
         res.status(200).json({
