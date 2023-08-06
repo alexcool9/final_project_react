@@ -86,9 +86,7 @@ router.route('/cards').get((req, res, next) => {
 
 router.route('/:id').get(async (req, res, next) => {
     try {
-        console.log('id', req.params.id);
-        const data = await Card.find({_id: req.params.id });
-        console.log('data', data)
+        const data = await Card.findById(req.params.id);
         res.json(data);
     }
     catch(error){
@@ -96,7 +94,7 @@ router.route('/:id').get(async (req, res, next) => {
     }
 })
 
-router.route('/edit/:id').get((req, res) => {
+router.route('/edit/:id').put(async (req, res) => {
     user.findById(req.params.id, (error, data) => {
         if (error) {
             return next(error)
@@ -106,7 +104,7 @@ router.route('/edit/:id').get((req, res) => {
     })
 })
 
-router.route('/update/:id').put(async (req, res, next) => {
+router.route('/:id').put(async (req, res, next) => {
     try {
         const data = await Card.findByIdAndUpdate(req.params.id, { $set: req.body });
         res.json(data);

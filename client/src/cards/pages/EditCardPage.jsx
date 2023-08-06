@@ -79,6 +79,7 @@ const EditCardPage = () => {
                 inputs={mapInputs}
             >
             </CardForm>
+            Hello2
         </Container>
     )
 }

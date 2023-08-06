@@ -5,6 +5,7 @@ const Joi = require("joi");
 
 let userSchema = new Schema(
     {
+        _id: { type: mongoose.SchemaTypes.ObjectId },
         name: {
             first: {
                 type: String,
