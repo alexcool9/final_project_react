@@ -34,7 +34,7 @@ import EditUserInfoPage from "../users/pages/EditUserInfoPage";
 const Router = () => {
   return (
     <Routes>
-      <Route path={ROUTES.ROOT} element={<HomePage />} />
+      <Route path={ROUTES.ROOT} element={<CardsPage />} />
 
       <Route path={ROUTES.ABOUT} element={<AboutPage />} />
       <Route path={ROUTES.CARDS} element={<CardsPage />} />
