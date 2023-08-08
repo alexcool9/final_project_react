@@ -17,10 +17,6 @@ const TypographyComponent = () => {
             <Typography align="left" color="success.main" fontWeight={400} variant="h2" component="div">left</Typography>
             <Typography align="right" color="success.dark" fontWeight={500} variant="h3" component="div">align</Typography>
 
-            <Typography >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, assumenda veniam itaque enim repellat reiciendis sapiente amet, numquam atque maiores commodi? Expedita nesciunt voluptatum illum voluptas earum ad aliquid quo.</Typography>
-            <hr />
-            <Typography noWrap >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, assumenda veniam itaque enim repellat reiciendis sapiente amet, numquam atque maiores commodi? Expedita nesciunt voluptatum illum voluptas earum ad aliquid quo.</Typography>
-
             <Typography sx={{
                 margin: 2,
                 backgroundColor: "warning.main",
