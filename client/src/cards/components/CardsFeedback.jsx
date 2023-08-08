@@ -27,7 +27,6 @@ CardsFeedback.propTypes = {
 
 CardsFeedback.defaultProps = {
     onLike: () => {
-        console.log('I Like this card');
     },
 };
 

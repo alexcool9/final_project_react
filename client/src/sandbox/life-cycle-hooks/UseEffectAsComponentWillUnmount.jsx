@@ -4,11 +4,10 @@ import { Box, Button, Container } from "@mui/material";
 
 const UseEffectAsComponentWillUnmount = () => {
   useEffect(() => {
-    console.log(`in useEffect: ${getTime()}`);
-    return () => console.log(`in render - use effect will unmount: ${getTime()}`);
+    return () => { };
   }, []);
 
-  return <div>{console.log(`in useEffect render: ${getTime()}`)}</div>
+  return <div></div>
 };
 
 export default UseEffectAsComponentWillUnmount;

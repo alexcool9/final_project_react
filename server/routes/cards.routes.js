@@ -43,25 +43,6 @@ router.patch('/:id', auth, async (req, res)=>{
     }
 });
 
-// router.route('/:id').patch( async (req, res, next) => {
-//     try{
-//         const card = await Card.findById(req.params.id);
-//         console.log('user',req.user);
-//         const index = card.likes.findIndex(like => like == req.params.id);
-//         if(index >= 0) {
-//             card.likes.splice(index, 1);
-//         }
-//         else {
-//             card.likes.push(req.params.id);
-//         }
-//         card.save();
-//         res.json(card);
-//     }
-//     catch(error) {
-//         res.send(error);
-//     }
-// });
-
 router.route('/create').post((req, res, next) => {
     Card.create(req.body).then()
         .then((result) => {

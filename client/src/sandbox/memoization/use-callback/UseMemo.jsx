@@ -17,7 +17,6 @@
 //   return (
 //     <div style={{ position: "fixed", left: "50%", top: "50%" }}>
 //       <p>Height: {height}</p>
-//       {console.log("in rendering...")}
 //       <p>Age multiple: {slowFunction()}</p>
 
 //       <button style={{ padding: 4 }} onClick={incrementAge}>
@@ -41,8 +40,7 @@ const UseMemo = () => {
   const incrementHeight = () => setHeight((prev) => prev + 1);
 
   const slowFunction = useMemo(() => {
-    for (let i = 0; i < 3_000_000_000; i++) {}
-    console.log("in slow function");
+    for (let i = 0; i < 3_000_000_000; i++) { }
     return age * 2;
   }, [age]);
 

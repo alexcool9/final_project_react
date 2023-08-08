@@ -7,9 +7,7 @@ import CardsFeedback from "../components/CardsFeedback";
 
 const FavCardsPage = () => {
     const { value = {}, ...rest } = useCards();
-    console.log('FavCards - value', value.error ? value.error.message : "");
     const { isPending = false, error = { message: '' }, cards = [] } = value;
-    console.log('value -error', error)
     const { message: errorMessage = '' } = error || {};
     const { handleDeleteCard, handleGetFavCards } = rest;
 

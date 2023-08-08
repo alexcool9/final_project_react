@@ -2,7 +2,6 @@ import React from "react";
 import { any, number } from "prop-types";
 
 const ChildAnyAndDefaultProps = ({ name, age }) => {
-  console.log(age);
   return <div>{name}</div>;
 };
 

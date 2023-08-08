@@ -16,7 +16,7 @@ const FormTest = () => {
         last: Joi.string().min(2).required(),
     };
 
-    const handleSubmit = (data) => console.log(data);
+    const handleSubmit = (data) => { };
 
     const { value, ...rest } = useForm(INITIAL_FORM, schema, handleSubmit);
 

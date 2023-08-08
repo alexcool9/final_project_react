@@ -5,15 +5,13 @@ import { Box, Button, Container } from "@mui/material";
 const UseEffectAsComponentDidUpdate = () => {
   const [count, setCount] = useState(0);
   const [num, setNum] = useState(0);
-  
+
   useEffect(() => {
-    console.log("in useEffect: ", getTime());
   }, [num]);
 
   return (
     <>
       <Container>
-        {console.log("in render: ", getTime())}
         <Box>Count: {count}</Box>
         <div>
           <Button

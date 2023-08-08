@@ -4,10 +4,9 @@ import { Box, Button, Container } from "@mui/material";
 
 const UseEffectAsComponentDidMount = () => {
     const [count, setCount] = useState(0);
-    
+
     useEffect(() => {
-        console.log('in useEffect: ', getTime());
-        setCount(prev => prev +1);
+        setCount(prev => prev + 1);
     }, []);
 
     return (
@@ -16,8 +15,8 @@ const UseEffectAsComponentDidMount = () => {
             <Box>Count: {count}</Box>
             <div>
 
-            <Button variant="outlined" color="primary" onClick={() => setCount(prev => prev + 1)}>+</Button>
-            <Button variant="outlined" color="primary" onClick={() => setCount(prev => prev - 1)}>-</Button>
+                <Button variant="outlined" color="primary" onClick={() => setCount(prev => prev + 1)}>+</Button>
+                <Button variant="outlined" color="primary" onClick={() => setCount(prev => prev - 1)}>-</Button>
             </div>
         </Container>
     )

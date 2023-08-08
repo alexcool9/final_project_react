@@ -7,13 +7,11 @@ const UseEffectAsComponentUpdateNoDeps = () => {
   const [num, setNum] = useState(0);
 
   useEffect(() => {
-    console.log("in useEffect: ", getTime());
   });
 
   return (
     <>
       <Container>
-        {console.log("in render: ", getTime())}
         <Box>Count: {count}</Box>
         <div>
           <Button

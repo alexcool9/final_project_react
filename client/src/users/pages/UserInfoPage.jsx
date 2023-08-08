@@ -14,8 +14,6 @@ const UserInfoPage = () => {
   const { user } = useUser();
   const { handleLogin } = useUsers();
 
-  console.log('userrr', user)
-
   const { value, ...rest } = useForm(
     initialLoginForm,
     loginSchema,

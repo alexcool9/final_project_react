@@ -36,7 +36,6 @@ const useUsers = () => {
             requestStatus(false, null, null, userFromLocalStorage);
             navigate(ROUTES.CARDS);
         } catch (error) {
-            console.log('user_login_fail 2');
             requestStatus(false, error, null);
         }
     }, [navigate, requestStatus]);
@@ -50,7 +49,6 @@ const useUsers = () => {
         async (userFromClient) => {
             try {
                 const normalizedUser = normalizeUser(userFromClient);
-                console.log('normalizedUser', normalizedUser);
                 await signup(normalizedUser);
                 await handleLogin({
                     email: userFromClient.email,
